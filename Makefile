@@ -21,8 +21,8 @@ test_display.o:	ht16K33.h test_display.c
 
 ###
 
-game:	game.o conway.o ht16K33.o
-	$(CC) -o game conway.o ht16K33.o game.o
+game:	game.o conway.o ht16K33.o buttons.o
+	$(CC) -o game conway.o ht16K33.o game.o buttons.o
 
 game.o:	game.h conway.h ht16K33.h game.c
 	$(CC) $(CFLAGS) -c -g game.c

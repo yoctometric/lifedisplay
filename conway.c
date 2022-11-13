@@ -18,6 +18,15 @@ void random_board(char board[BOARD_SIZE][BOARD_SIZE]) {
 	}
 }
 
+void empty_board(char board[BOARD_SIZE][BOARD_SIZE]) {
+        // first clear the board
+        for (int x = 0; x < BOARD_SIZE; x++) {
+                for (int y = 0; y < BOARD_SIZE; y++) {
+                        board[x][y] = 0;
+                }
+        }
+}
+
 //inits the board with a glider
 void glider_board(char board[BOARD_SIZE][BOARD_SIZE]) {
 	// first clear the board
@@ -115,4 +124,16 @@ char set_state(char board[BOARD_SIZE][BOARD_SIZE], int x, int y, char val) {
 	return old;
 }
 
+// toggle the cell at x,y
+char toggle_state(char board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
+        // clamp indices
+        if (x < 0) x += BOARD_SIZE;
+        else x = x % BOARD_SIZE;
 
+        if (y < 0) y += BOARD_SIZE;
+        else y = y % BOARD_SIZE;
+
+	char old = board[x][y];
+	board[x][y] = !old;
+	return old;
+}

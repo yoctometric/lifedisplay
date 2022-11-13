@@ -13,20 +13,19 @@ int main() {
 
 	fd = open_gpio();
 
-	struct gpiohandle_request req1;
-	struct gpiohandle_request req2;
-	struct gpiohandle_request req3;
+	int button_frames[NUM_BUTTONS] = {0, 0, 0};
+	struct gpiohandle_request buttons[NUM_BUTTONS];
 
-	init_button(BUTTON_1, fd, &req1);
-	init_button(BUTTON_2, fd, &req2);
-	init_button(BUTTON_3, fd, &req3);
+	init_button(BUTTON_1, fd, &buttons[0]);
+	init_button(BUTTON_2, fd, &buttons[1]);
+	init_button(BUTTON_3, fd, &buttons[2]);
 
 
 	while(1) {
 		usleep(10000);
 
-		read = read_pin(&req1);
-		printf("Read %d\n", read);
+		update_buttons(buttons, button_frames);
+		printf("B1: %d B2: %d B3: %d\n", button_frames[0], button_frames[1], button_frames[2]);
 
 	}
 

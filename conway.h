@@ -2,6 +2,9 @@
 
 #define BOARD_SIZE 8
 
+// clear a board
+void empty_board(char board[BOARD_SIZE][BOARD_SIZE]);
+
 // init board randomly
 void random_board(char board[BOARD_SIZE][BOARD_SIZE]);
 
@@ -19,3 +22,6 @@ char get_state(char board[BOARD_SIZE][BOARD_SIZE], int x, int y);
 
 // sets the state of a cell
 char set_state(char board[BOARD_SIZE][BOARD_SIZE], int x, int y, char val);
+
+// toggles the state of a cell
+char toggle_state(char board[BOARD_SIZE][BOARD_SIZE], int x, int y);

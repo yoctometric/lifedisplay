@@ -61,3 +61,16 @@ int read_pin(struct gpiohandle_request* req) {
 
 }
 
+// updates the amount of frames each button has been held down
+void update_buttons(struct gpiohandle_request reqs[NUM_BUTTONS], int button_frames[NUM_BUTTONS]) {
+	int res;
+	for (int i = 0; i < NUM_BUTTONS; i++) {
+		res = read_pin(&reqs[i]);
+		if (res == 0) {
+			button_frames[i] = 0;
+		}
+		button_frames[i] += res;
+	}
+}
+
+

@@ -17,5 +17,6 @@ int disable_ht16K33(int fd);
 int clear_screen(int fd);
 int write_display(int fd);
 int draw_pixel(unsigned char x, unsigned char y);
+int draw_cursor(unsigned char x, unsigned char y);
 
 #endif // HT16K33_H_

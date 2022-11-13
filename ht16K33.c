@@ -71,6 +71,16 @@ int draw_pixel(unsigned char x, unsigned char y) {
 	return 0;
 }
 
+// draws the cursor (in red) to the display buffer
+int draw_cursor(unsigned char x, unsigned char y) {
+        if ((y < 0) || (y > 8)) return -1;
+        if ((x < 0) || (x > 16)) return -1;
+
+        display_buffer[7 - y] |= 1 << (x + 8);
+
+        return 0;
+
+}
 
 // write the buffer to the display (source: adafruit)
 int write_display(int fd) {

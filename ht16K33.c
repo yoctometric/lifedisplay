@@ -2,11 +2,14 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdint.h>
 
 #include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
 
 #include "ht16K33.h"
+
+int display_buffer[8]; // the raw display data
 
 
 // sets up the display. Returns the file descriptor, or returns -1 if an error occured.
@@ -59,48 +62,38 @@ int disable_ht16K33 (int fd) {
 }
 
 
-// writes a column <col> (0 - 255) to row <row> (0 - 7), with alt_color either 0 or 1
-int write_col(int fd, int col, unsigned char row, int alt_color) {
-	unsigned char buffer[2];
+// draws a pixel to thge display buffer. Only actually displayed on screen after write_display() is called
+int draw_pixel(unsigned char x, unsigned char y) {
+	if ((y < 0) || (y > 8)) return -1;
+	if ((x < 0) || (x > 16)) return -1;
 
-	buffer[0] = (row * 2) + alt_color;
-	buffer[1] = col;
-	write_buf(fd, buffer);
+	display_buffer[y] |= 1 << x;
 }
 
 
+// write the buffer to the display (source: adafruit)
+int write_display(int fd) {
+	uint8_t buffer[17];
 
+	buffer[0] = 0x00;
 
-// writes the buffer to the display
-int write_buf(int fd, char * buffer) {
-	int res;
-	int len = sizeof(buffer) / sizeof(buffer[0]);
+	for (uint8_t i = 0; i < 8; i++) {
+		buffer[1 + 2 * i] = display_buffer[i] & 0xff;
+		buffer[2 + 2 * i] = display_buffer[i] >> 8;
+	}
 
-	// finn the write buffer with <buffer> and pad the rest with zeroes
-	unsigned char b[17];
-	for (int i = 0; i < len; i++) b[i] = buffer[i];
-	for (int i = len; i < 17; i++) b[i] = 0;
-
-	// write it
-	res = write(fd, b, len);
-	if (res < 0) return -1;
-
-	return 0;
+	int res = write(fd, buffer, 17);
+	return res;
 }
 
 
 // completely clears the screen
 int clear_screen(int fd) {
-	unsigned char buffer[17];
-	for(int i = 0; i < 17; i++) {
-		buffer[i] = 0;
+	for (int i = 0; i < 8; i++) {
+		display_buffer[i] = 0;
 	}
 
-	// clear each address
-	for(int a = 0; a < 16; a++) {
-		buffer[0] = a;
-		write(fd, buffer, 17);
-	}
+	write_display(fd);
 }
 
 

@@ -10,42 +10,54 @@
 #include <sys/ioctl.h>
 #include <linux/gpio.h>
 
-#include <pigpio.h>
-
 #include "buttons.h"
 
-// sets up the buttons for use
-int init_buttons() {
-	int res = gpioInitialise();
-	if (res < 0) {
-		printf("Error initialising GPIO\n");
+
+// returns the file descriptor of the gpio device
+int open_gpio() {
+	int fd;
+
+        fd = open("/dev/gpiochip0", O_RDWR);
+
+	if (fd < 0) {
+		printf("Failed to open the gpio device\n");
 		exit(1);
 	}
 
-	gpioSetMode(BUTTON_1, PI_INPUT);
-	gpioSetMode(BUTTON_2, PI_INPUT);
-	gpioSetMode(BUTTON_3, PI_INPUT);
-
-	return res;
+	return fd;
 }
 
-// cleans up the gpio environment
-void terminate_buttons() {
-	gpioTerminate();
+// sets up the button for use
+void init_button(int pin, int fd, struct gpiohandle_request* req) {
+	int rv;
+
+        // setup request struct
+        memset(req, 0, sizeof(struct gpiohandle_request)); // zero contents
+        req->flags = GPIOHANDLE_REQUEST_INPUT; // requesting input this time
+        req->lines = 1;
+        req->lineoffsets[0] = pin;
+        // get a handle for the config
+        rv = ioctl(fd, GPIO_GET_LINEHANDLE_IOCTL, req);
+        if (rv < 0) {
+                printf("Error getting config handle %s", strerror(errno));
+                exit(1);
+        }
+
+
 }
 
 
 // simple function to read pin
-int read_pin(int pin) {
-	int res;
-	res = gpioRead(pin);
-	return res;
+int read_pin(struct gpiohandle_request* req) {
+        int rv;
+	struct gpiohandle_data data;
+        memset(&data, 0, sizeof(data)); // wipe data
+        rv = ioctl(req->fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &data);
+        if (rv < 0) {
+                printf("Error reading pin %s\n", strerror(errno));
+        }
+        return data.values[0];
+
+
 }
 
-
-
-// halts program until a gpio button press is detected and returns that button
-int await_input() {
-
-	return 0;
-}

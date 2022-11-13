@@ -4,10 +4,7 @@
 #define BUTTON_3 25
 
 
-struct gpiohandle_request;
-struct gpiohandle_data;
 
-int init_buttons();
-void terminate_buttons();
-int read_pin(int pin);
-int await_input();
+int open_gpio();
+void init_button(int pin, int fd, struct gpiohandle_request* req);
+int read_pin(struct gpiohandle_request* req);

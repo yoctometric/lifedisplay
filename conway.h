@@ -5,6 +5,9 @@
 // init board randomly
 void random_board(char board[BOARD_SIZE][BOARD_SIZE]);
 
+// init board with a glider
+void glider_board(char board[BOARD_SIZE][BOARD_SIZE]);
+
 // prints the board state to the terminal
 void print_board(char board[BOARD_SIZE][BOARD_SIZE]);
 

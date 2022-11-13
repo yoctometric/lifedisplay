@@ -18,6 +18,23 @@ void random_board(char board[BOARD_SIZE][BOARD_SIZE]) {
 	}
 }
 
+//inits the board with a glider
+void glider_board(char board[BOARD_SIZE][BOARD_SIZE]) {
+	// first clear the board
+	for (int x = 0; x < BOARD_SIZE; x++) {
+		for (int y = 0; y < BOARD_SIZE; y++) {
+			board[x][y] = 0;
+		}
+	}
+
+	// add glider
+	int xoff = 2;
+	board[1+xoff][2] = 1;
+	board[2+xoff][3] = 1;
+	board[3+xoff][1] = 1;
+	board[3+xoff][2] = 1;
+	board[3+xoff][3] = 1;
+}
 
 // prints the board state to the terminal
 void print_board(char board[BOARD_SIZE][BOARD_SIZE]) {
@@ -98,15 +115,4 @@ char set_state(char board[BOARD_SIZE][BOARD_SIZE], int x, int y, char val) {
 	return old;
 }
 
-
-// simple visual testing to make sure everything works properly
-int main() {
-	char board[BOARD_SIZE][BOARD_SIZE];
-	random_board(board);
-	print_board(board);
-	step_board(board);
-	print_board(board);
-	step_board(board);
-	print_board(board);
-}
 

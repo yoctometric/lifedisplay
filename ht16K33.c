@@ -9,8 +9,7 @@
 
 #include "ht16K33.h"
 
-int display_buffer[8]; // the raw display data
-
+int display_buffer[16]; // actually define the displaybuffer here
 
 // sets up the display. Returns the file descriptor, or returns -1 if an error occured.
 int setup_ht16K33 () {
@@ -68,6 +67,8 @@ int draw_pixel(unsigned char x, unsigned char y) {
 	if ((x < 0) || (x > 16)) return -1;
 
 	display_buffer[y] |= 1 << x;
+
+	return 0;
 }
 
 
@@ -94,6 +95,7 @@ int clear_screen(int fd) {
 	}
 
 	write_display(fd);
+	return 0;
 }
 
 

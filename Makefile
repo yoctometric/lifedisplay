@@ -1,7 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -O2
+LIBGPIO = -lpigpio -lrt
 
-all:	test_display game
+all:	test_display test_buttons game
 
 ###
 
@@ -28,3 +29,15 @@ game.o:	game.h conway.h ht16K33.h game.c
 	$(CC) $(CFLAGS) -c -g game.c
 
 ###
+
+test_buttons:	buttons.o test_buttons.o
+	$(CC) -o test_buttons test_buttons.o buttons.o $(LIBGPIO)
+
+buttons.o:	buttons.h buttons.c
+	$(CC) $(CFLAGS) -c -g buttons.c $(LIBGPIO)
+
+test_buttons.o:	buttons.h test_buttons.c
+	$(CC) $(CFLAGS) -c -g test_buttons.c $(LIBGPIO)
+
+###
+

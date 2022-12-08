@@ -1,6 +1,6 @@
 # Will C ECE 471 Final Project
 ## Conway's Game of Life
-This project implements Conway's Game of Life in C and displays it using an 8x8 LED matrix.
+This project implements Conway's Game of Life in C and displays it using an 8x8 LED matrix and the Raspberry Pi.
 
 
 ## Hardware

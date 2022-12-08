@@ -4,7 +4,7 @@ This project implements Conway's Game of Life in C and displays it using an 8x8 
 ## Hardware
 The required materials are:  
 
- - One HT16K33 8x8 LED Backpack, with a matching 8x8 LED matrix square
+ - One HT16K33 8x8 LED Backpack, with a matching 8x8 bi-color LED matrix square
  - One Raspberry Pi (RPI). This project was designed and tested on the Raspberry Pi 3B+
  - Three push buttons and three 470 ohm resistors
  - A breadboard and some wires / jumper cables

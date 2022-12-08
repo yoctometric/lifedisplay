@@ -1,4 +1,4 @@
-# Conway's Game of Life Physical Console
+# LifeDisplay
 This project implements Conway's Game of Life in C and displays it using an 8x8 LED matrix and the Raspberry Pi.  
 
 ## Hardware
@@ -17,6 +17,8 @@ To attach and use the listed components, follow these steps:
 5. Connect a button through a 470 ohm resistor to GPIO 24 on the RPI
 6. Connect a button through a 470 ohm resistor to GPIO 25 on the RPI
 7. Connect a button through a 470 ohm resistor to GPIO 26 on the RPI
+
+![A basic circuit diagram of the console](img/Circuit.png)
 
 ## Building  
 To compile the program, run ```make``` in the project directory. You can then test the various components with ```test_display``` and ```test_buttons```

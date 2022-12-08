@@ -18,8 +18,11 @@ To attach and use the listed components, follow these steps:
 6. Connect a button through a 470 ohm resistor to GPIO 25 on the RPI
 7. Connect a button through a 470 ohm resistor to GPIO 26 on the RPI
 
+## Building  
+To compile the program, run ```make``` in the project directory. You can then test the various components with ```test_display``` and ```test_buttons```
+
 ## Usage  
-Once everything has been wired correctly, run ./game in a terminal. The game will then start.
+Once everything has been wired correctly, run ```./game``` in a terminal. The game will then start.
 To edit the game grid, press button one to toggle between play and edit mode. When in edit mode, press button three to move the cursor and button two to toggle the selected cell on and off.
 Enjoy!
 

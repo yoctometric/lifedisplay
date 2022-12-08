@@ -8,7 +8,7 @@ For the physical version of this project, the required materials are:
 
  - One HT16K33 8x8 LED Backpack, with a matching 8x8 LED matrix square
  - One Raspberry Pi (RPI). This project was designed and tested on the Raspberry Pi 3B+
- - Three push buttons
+ - Three push buttons and three 470 ohm resistors
  - A breadboard and some wires / jumper cables
 
 To attach and use the listed components, follow these steps:

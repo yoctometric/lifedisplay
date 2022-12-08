@@ -9,7 +9,7 @@
 #include "buttons.h"
 
 int main() {
-	int read, fd;
+	int fd;
 
 	fd = open_gpio();
 

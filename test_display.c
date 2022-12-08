@@ -8,7 +8,6 @@
 
 int main () {
 	int fd;
-	unsigned char buffer[17];
 
 	fd = setup_ht16K33();
 	usleep(100000);

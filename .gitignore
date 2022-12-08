@@ -1,1 +1,6 @@
 *.swp
+*.o
+test_buttons
+test_display
+conway
+game

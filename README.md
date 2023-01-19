@@ -18,6 +18,7 @@ To attach and use the listed components, follow these steps:
 6. Connect a button through a 470 ohm resistor to GPIO 25 on the RPI
 7. Connect a button through a 470 ohm resistor to GPIO 26 on the RPI
 
+This block diagram shows the complete design:  
 ![A basic circuit diagram of the console](img/Circuit.png)
 
 ## Building  

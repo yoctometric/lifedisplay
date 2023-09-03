@@ -1,5 +1,6 @@
 # LifeDisplay
 This project implements Conway's Game of Life in C and displays it using an 8x8 LED matrix and the Raspberry Pi.  
+[Demonstration Video on Youtube](https://www.youtube.com/watch?v=ajTcpIhw98Y)
 
 ## Hardware
 The required materials are:  
